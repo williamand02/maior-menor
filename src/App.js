@@ -1,6 +1,9 @@
 import React, { useState } from "react";
 import "./styles.css";
 
+import Entrada from "./components/entrada";
+import Fim from "./components/fim";
+
 export default function App() {
   const [estado, setEstado] = useState("ENTRADA");
   const [min, setMin] = useState(0);
@@ -32,19 +35,13 @@ export default function App() {
   const acertou = () => {
     setEstado("FIM");
   };
-  if (estado === "ENTRADA") {
-    return <button onClick={iniciarJogo}>jogar novamente</button>;
-  }
-  if (estado === "FIM") {
+  if (estado === "ENTRADA") return <Entrada iniciar={iniciarJogo} />;
+
+  if (estado === "FIM")
     return (
-      <>
-        <p>
-          Acertei o número {palpite} com {numPalpites} chute!
-        </p>
-        <button onClick={iniciarJogo}>Jogar novamente</button>
-      </>
+      <Fim palpite={palpite} numPalpites={numPalpites} iniciar={iniciarJogo} />
     );
-  }
+
   return (
     <div className="App">
       <p>O seu número é {palpite}?</p>
